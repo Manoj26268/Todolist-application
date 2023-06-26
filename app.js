@@ -96,8 +96,18 @@ app.get("/:customListName", function(req, res){
           name: customListName,
           items: defaultItems
         });
-        list.save();
-        res.redirect("/" + customListName);
+        (async ()=> {
+          try {
+             await list.save();
+             res.redirect("/" + customListName);
+            // console.log(people);
+            // mongoose.connection.close();
+            
+          } catch (err) {
+            console.log(err);
+          }
+      })();
+      
       }
       else {
         //Show an existing list
@@ -153,15 +163,35 @@ app.post("/", function(req, res){
   });
 
   if (listName === "Today"){
-    item.save();
-    res.redirect("/");
+    (async ()=> {
+      try {
+         await  item.save();
+         res.redirect("/");
+        // console.log(people);
+        // mongoose.connection.close();
+        
+      } catch (err) {
+        console.log(err);
+      }
+  })();
+    
   } else {
     (async ()=> {
       try {
         const foundList = await  List.findOne({name: listName});
         foundList.items.push(item);
-        foundList.save();
-        res.redirect("/" + listName);
+        (async ()=> {
+          try {
+             await  foundList.save();
+             res.redirect("/" + listName);
+            // console.log(people);
+            // mongoose.connection.close();
+            
+          } catch (err) {
+            console.log(err);
+          }
+      })();
+       
         // mongoose.connection.close();
       } catch (err) {
         console.log(err);
