@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-const db = 'mongodb+srv://manojanthati26:Manoj@cluster0.zxoafsd.mongodb.net/Todolistapplication?retryWrites=true&w=majority';
+const db = 'mongodb+srv://manojanthati26:manoj268@cluster0.zxoafsd.mongodb.net/Todolistapplication?retryWrites=true&w=majority';
 
 mongoose.connect(db,{
   useNewUrlParser:true,
